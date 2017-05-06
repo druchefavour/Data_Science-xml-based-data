@@ -1,5 +1,7 @@
 # SLIDE RULE DSI XML PROJECT
 
+
+
 ```python
 # XML exercise and solution
 # Solutions to exercise of accessing nodes in XML tree structure
@@ -154,38 +156,33 @@ sorted_largest_lake
 
 ```python
 # 4 c. Find name and country of the airport at highest elevation
+import operator
+from xml.etree import ElementTree as ET
+tree = ET.parse('./data/mondial_database.xml')
+root = tree.getroot()
 highest_elev_airport = {}
 for airport in root.iterfind('airport'):
     name = airport.get('iatacode')
     #print (name)
     country = airport.get('country')
     #print (country)
-    elevation = airport.findtex('./elevation')
+    elevation = airport.findtext('./elevation')
     if elevation is None:
         pass
     elif elevation=='':
         pass
     else:
         #print (float(elevation.text))
-        highest_elev_airport[name, country]=float(elevation.text)
+        highest_elev_airport[name, country]=float(elevation)
 sorted_highest_elev_airport = sorted(highest_elev_airport.items(), key=operator.itemgetter(1), reverse=True)[:1]
 sorted_highest_elev_airport
 ```
 
 
-    ---------------------------------------------------------------------------
 
-    TypeError                                 Traceback (most recent call last)
 
-    <ipython-input-9-96f3eb472e23> in <module>()
-         13     else:
-         14         #print (float(elevation.text))
-    ---> 15         highest_elev_airport[name, country]=float(elevation.text)
-         16 sorted_highest_elev_airport = sorted(highest_elev_airport.items(), key=operator.itemgetter(1), reverse=True)[:1]
-         17 sorted_highest_elev_airport
-    
+    [(('LPB', 'BOL'), 4063.0)]
 
-    TypeError: float() argument must be a string or a number, not 'NoneType'
 
 
 
